@@ -1,0 +1,37 @@
+name: Build and deploy web app to GH Pages
+
+on:
+  push:
+    branches:
+      - "main"
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install `wasm-pack`
+        run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+
+      - name: Build WASM package
+        run: |
+          cd calculator_web/
+          wasm-pack build
+
+      - name: Build static site
+        run: |
+          cd calculator_web/www/
+          npm ci
+          npm run build
+
+      - name: Deploy site
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: calculator_web/www/dist
+          single-commit: true

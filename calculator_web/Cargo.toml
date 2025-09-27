@@ -1,0 +1,16 @@
+[package]
+name = "calculator_web"
+version = "0.1.0"
+description = "wasm package for the `calculator` project."
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+calculator = { version = "0.1.0", path = "../calculator" }
+wasm-bindgen = "0.2.87"

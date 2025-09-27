@@ -1,0 +1,17 @@
+[package]
+name = "calculator_cli"
+version = "0.1.0"
+description = "simple cli tool consuming the `calculator` library package."
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[[bin]]
+name = "calc"
+path = "src/main.rs"
+
+[dependencies]
+calculator = { version = "0.1.0", path = "../calculator" }
+anyhow = { workspace = true }
